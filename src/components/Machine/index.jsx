@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import Pad from "../Pad";
+import Display from "../Display";
 import styles from "./styles.module.scss";
 
 const PAD_ARR = ["Q", "W", "E", "A", "S", "D", "Z", "X", "C"];
@@ -52,45 +53,54 @@ const PAD_DATA = [
 ];
 
 function Machine() {
-  const handlePress = (value, url) => {
-    console.log("pressed", value);
+  // power on-off of machine
+  const [isOn, setIsOn] = useState(true);
+  console.log(isOn);
+  const [label, setLabel] = useState("");
+  const handlePress = (obj, url) => {
+    setLabel(obj.label);
     const a = new Audio(url);
     a.play();
   };
 
   useEffect(() => {
-    const keydownListener = (e) => {
-      if (PAD_ARR.includes(e.key.toUpperCase())) {
-        console.log(PAD_DATA.find((x) => x.id === e.key.toUpperCase()).url);
-        handlePress(
-          e.key,
-          PAD_DATA.find((x) => x.id === e.key.toUpperCase()).url
-        );
-      }
-    };
-    window.addEventListener("keydown", keydownListener);
-    return () => {
-      window.removeEventListener("keydown", keydownListener);
-    };
-  }, []);
+    if (isOn) {
+      const keydownListener = (e) => {
+        if (PAD_ARR.includes(e.key.toUpperCase())) {
+          const targetObj = PAD_DATA.find((x) => x.id === e.key.toUpperCase());
+          handlePress(targetObj, targetObj.url);
+        }
+      };
+      window.addEventListener("keydown", keydownListener);
+      return () => {
+        window.removeEventListener("keydown", keydownListener);
+      };
+    } else {
+      setLabel("");
+    }
+  }, [isOn]);
 
   return (
     <div>
-      <h2>Machine</h2>
-      <ul className={styles.padList}>
-        {PAD_DATA
-          ? PAD_DATA.map((obj, i) => {
-              const onClick = () => {
-                handlePress(obj.id, obj.url);
-              };
-              return (
-                <li key={i}>
-                  <Pad onClick={onClick} label={obj.id} />
-                </li>
-              );
-            })
-          : null}
-      </ul>
+      <div className={styles.main}>
+        <Display label={label} setOn={setIsOn} on={isOn} />
+        <ul className={styles.padList}>
+          {PAD_DATA
+            ? PAD_DATA.map((obj, i) => {
+                const onClick = () => {
+                  if (isOn) {
+                    handlePress(obj, obj.url);
+                  }
+                };
+                return (
+                  <li key={i}>
+                    <Pad onClick={onClick} label={obj.id} />
+                  </li>
+                );
+              })
+            : null}
+        </ul>
+      </div>
     </div>
   );
 }
