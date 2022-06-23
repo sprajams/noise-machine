@@ -22,18 +22,18 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: 0.1s ease-in-out;
+  transition: 0.2s ease-in-out;
   //   lights up when user hovers over the pad/button
   &:hover {
-    background-color: rgb(247, 226, 205);
+    background: rgb(230, 230, 230);
+  }
+  // micmic action of button going down slightly when pressed/clicked
+  &:active {
+    top: 6px;
+    background-color: rgb(248, 216, 184);
   }
 }
 .btnBottom {
   background: rgb(126, 126, 126);
   bottom: 0;
-}
-
-// micmic action of button going down slightly when pressed/clicked
-.btnTop:active {
-  top: 5px;
 }
