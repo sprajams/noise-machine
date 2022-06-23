@@ -1,6 +1,6 @@
 .btn {
-  width: 50px;
-  height: 50px;
+  width: 100px;
+  height: 100px;
   cursor: pointer;
   position: relative;
   border: none;
@@ -10,14 +10,14 @@
 .btnTop,
 .btnBottom {
   width: 100%;
-  height: 46px;
+  height: 94px;
   position: absolute;
   left: 0;
   border-radius: 4px;
 }
 .btnTop {
   top: 0;
-  background-color: rgb(179, 178, 177);
+  background-color: rgb(202, 202, 202);
   z-index: 1;
   display: flex;
   justify-content: center;
@@ -25,7 +25,7 @@
   transition: 0.1s ease-in-out;
   //   lights up when user hovers over the pad/button
   &:hover {
-    background-color: rgb(233, 211, 187);
+    background-color: rgb(247, 226, 205);
   }
 }
 .btnBottom {
@@ -35,5 +35,5 @@
 
 // micmic action of button going down slightly when pressed/clicked
 .btnTop:active {
-  top: 3px;
+  top: 5px;
 }

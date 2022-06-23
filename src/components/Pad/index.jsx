@@ -1,9 +1,9 @@
 import styles from "./styles.module.scss";
 
-function Pad({ label }) {
+function Pad({ label, onClick }) {
   return (
     <div>
-      <button className={styles.btn}>
+      <button onClick={onClick} className={styles.btn}>
         <span className={styles.btnTop}>{label}</span>
         <span className={styles.btnBottom}></span>
       </button>
