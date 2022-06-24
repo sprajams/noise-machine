@@ -55,12 +55,17 @@ const PAD_DATA = [
 function Machine() {
   // power on-off of machine
   const [isOn, setIsOn] = useState(true);
-  console.log(isOn);
+  // screen display of which pad is pressed
   const [label, setLabel] = useState("");
+  // volume of app
+  const [volume, setVolume] = useState(45);
+
   const handlePress = (obj, url) => {
     setLabel(obj.label);
     const a = new Audio(url);
     a.play();
+    // adjust volume
+    a.volume = volume / 100;
   };
 
   useEffect(() => {
@@ -83,7 +88,13 @@ function Machine() {
   return (
     <div>
       <div className={styles.main}>
-        <Display label={label} setOn={setIsOn} on={isOn} />
+        <Display
+          label={label}
+          setOn={setIsOn}
+          on={isOn}
+          setVolume={setVolume}
+          volume={volume}
+        />
         <ul className={styles.padList}>
           {PAD_DATA
             ? PAD_DATA.map((obj, i) => {
