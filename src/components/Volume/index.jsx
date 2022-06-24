@@ -1,10 +1,11 @@
 import styles from "./styles.module.scss";
 
-function Volume({ setVolume, volume }) {
+function Volume({ setVolume, volume, setDisplayVolume, on }) {
   const handleChange = (e) => {
     const rawData = e.target.value;
     const vol = Math.round(rawData);
     setVolume(vol);
+    setDisplayVolume(true);
   };
   return (
     <div>
@@ -19,6 +20,7 @@ function Volume({ setVolume, volume }) {
           onChange={handleChange}
           value={volume}
           name="volume"
+          disabled={!on}
         />
       </div>
     </div>

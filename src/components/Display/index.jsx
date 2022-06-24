@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import clsx from "clsx";
 import styles from "./styles.module.scss";
 import Volume from "../Volume";
@@ -6,6 +7,18 @@ function Display({ label, setOn, on, volume, setVolume }) {
   const onClick = () => {
     setOn(!on);
   };
+
+  const [displayVolume, setDisplayVolume] = useState(true);
+  // show volume for 1.5s only when user changes volume
+  useEffect(() => {
+    const volumeScreenTime = setTimeout(() => {
+      setDisplayVolume(false);
+    }, 1500);
+    return () => {
+      clearTimeout(volumeScreenTime);
+    };
+  }, [volume]);
+
   return (
     <div className={styles.outer}>
       {/* power button */}
@@ -26,14 +39,18 @@ function Display({ label, setOn, on, volume, setVolume }) {
       <div className={clsx(styles.screen, !on && styles.screenOff)}>
         {!on ? null : (
           <div>
-            <div>{label}</div>
-            <div>Volume: {volume}</div>
+            {displayVolume ? <div>Volume: {volume}</div> : <div>{label}</div>}
           </div>
         )}
       </div>
 
       {/* volume control */}
-      <Volume setVolume={setVolume} volume={volume} />
+      <Volume
+        on={on}
+        setVolume={setVolume}
+        volume={volume}
+        setDisplayVolume={setDisplayVolume}
+      />
     </div>
   );
 }
