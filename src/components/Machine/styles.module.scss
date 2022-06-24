@@ -1,7 +1,10 @@
 .main {
+  box-shadow: 4px 5px 6px rgb(105, 105, 105);
+  border-radius: 8px;
   @media (min-width: 768px) {
     display: flex;
     flex-direction: row-reverse;
+    box-shadow: 5px 6px 10px rgb(105, 105, 105);
   }
 }
 

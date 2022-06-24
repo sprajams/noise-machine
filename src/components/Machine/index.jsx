@@ -54,7 +54,7 @@ const PAD_DATA = [
 
 function Machine() {
   // power on-off of machine
-  const [isOn, setIsOn] = useState(true);
+  const [isOn, setIsOn] = useState(false);
   // screen display of which pad is pressed
   const [label, setLabel] = useState("");
   // volume of app

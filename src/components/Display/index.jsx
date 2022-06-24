@@ -13,7 +13,7 @@ function Display({ label, setOn, on, volume, setVolume }) {
   useEffect(() => {
     const volumeScreenTime = setTimeout(() => {
       setDisplayVolume(false);
-    }, 1500);
+    }, 750);
     return () => {
       clearTimeout(volumeScreenTime);
     };
@@ -51,6 +51,11 @@ function Display({ label, setOn, on, volume, setVolume }) {
         volume={volume}
         setDisplayVolume={setDisplayVolume}
       />
+
+      <div className={styles.knobWrap}>
+        <div className={styles.knob}></div>
+        <div className={styles.knob}></div>
+      </div>
     </div>
   );
 }

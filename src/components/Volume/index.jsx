@@ -8,8 +8,7 @@ function Volume({ setVolume, volume, setDisplayVolume, on }) {
     setDisplayVolume(true);
   };
   return (
-    <div>
-      <h2>volume</h2>
+    <div className={styles.outer}>
       <div className={styles.sliderWrap}>
         <input
           type="range"

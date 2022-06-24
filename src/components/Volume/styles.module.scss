@@ -1,9 +1,14 @@
-.sliderWrap {
-  width: 100%;
+.outer {
+  margin: 0 auto;
 }
 .sliderWrap {
   width: 200px;
 }
+
 .slider {
   width: 100%;
+  cursor: pointer;
+  &:disabled {
+    cursor: not-allowed;
+  }
 }
