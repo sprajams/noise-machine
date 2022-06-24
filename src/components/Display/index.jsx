@@ -19,7 +19,9 @@ function Display({ label, setOn, on }) {
           {on ? null : "OFF"}
         </span>
       </button>
-      <div className={styles.screen}>{label}</div>
+      <div className={clsx(styles.screen, !on && styles.screenOff)}>
+        {label}
+      </div>
     </div>
   );
 }
