@@ -1,14 +1,18 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import clsx from "clsx";
 import styles from "./styles.module.scss";
 
-function Pad({ id, audioSrc, label }) {
+function Pad({ id, audioSrc, label, disabled, showLabel, volume }) {
   const [keyPressed, setKeyPressed] = useState(false);
   const audioRef = useRef(null);
 
-  const playSound = () => {
-    audioRef.current.play();
-  };
+  const playSound = useCallback(() => {
+    if (!disabled) {
+      audioRef.current.volume = volume / 100;
+      audioRef.current.play();
+      showLabel(label);
+    }
+  }, [disabled, showLabel, label, volume]);
 
   useEffect(() => {
     const keydownListener = (e) => {
@@ -24,11 +28,12 @@ function Pad({ id, audioSrc, label }) {
     };
     window.addEventListener("keydown", keydownListener);
     window.addEventListener("keyup", keyupListener);
+
     return () => {
       window.removeEventListener("keydown", keydownListener);
       window.removeEventListener("keyup", keyupListener);
     };
-  }, [id]);
+  }, [id, playSound]);
 
   return (
     <div>
@@ -36,6 +41,7 @@ function Pad({ id, audioSrc, label }) {
         onClick={playSound}
         className={clsx(styles.btn, keyPressed && styles.keyPressed)}
         aria-label={label}
+        disabled={disabled}
       >
         <span className={styles.btnTop}>{id.toUpperCase()}</span>
         <span className={styles.btnBottom}></span>

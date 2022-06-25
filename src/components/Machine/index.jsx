@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Pad from "../Pad";
 import Display from "../Display";
 import styles from "./styles.module.scss";
@@ -59,12 +59,8 @@ function Machine() {
   // volume of app
   const [volume, setVolume] = useState(45);
 
-  const handlePress = (obj, url) => {
-    setLabel(obj.label);
-    const a = new Audio(url);
-    a.play();
-    // adjust volume
-    a.volume = volume / 100;
+  const showLabel = (text) => {
+    setLabel(text);
   };
 
   return (
@@ -81,14 +77,16 @@ function Machine() {
         <ul className={styles.padList}>
           {PAD_DATA
             ? PAD_DATA.map((obj, i) => {
-                const onClick = () => {
-                  if (isOn) {
-                    handlePress(obj, obj.url);
-                  }
-                };
                 return (
                   <li key={i} className="drum-pad" id={i}>
-                    <Pad id={obj.id} label={obj.label} audioSrc={obj.url} />
+                    <Pad
+                      id={obj.id}
+                      label={obj.label}
+                      audioSrc={obj.url}
+                      disabled={!isOn}
+                      showLabel={showLabel}
+                      volume={volume}
+                    />
                   </li>
                 );
               })
