@@ -6,6 +6,21 @@
   border: none;
   border-radius: 4px;
   background: inherit;
+
+  // lights up when user hovers over the pad/button
+  &:hover {
+    .btnTop {
+      background: rgb(230, 230, 230);
+    }
+  }
+  // mimic action of button going down slightly when pressed/clicked
+  &:active,
+  &.keyPressed {
+    .btnTop {
+      top: 6px;
+      background-color: rgb(248, 216, 184);
+    }
+  }
 }
 .btnTop,
 .btnBottom {
@@ -23,15 +38,6 @@
   align-items: center;
   transition: 0.2s ease-in-out;
   z-index: 1;
-  //   lights up when user hovers over the pad/button
-  &:hover {
-    background: rgb(230, 230, 230);
-  }
-  // micmic action of button going down slightly when pressed/clicked
-  &:active {
-    top: 6px;
-    background-color: rgb(248, 216, 184);
-  }
 }
 .btnBottom {
   background: rgb(126, 126, 126);
