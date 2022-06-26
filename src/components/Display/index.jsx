@@ -3,7 +3,7 @@ import clsx from "clsx";
 import styles from "./styles.module.scss";
 import Volume from "../Volume";
 
-function Display({ label, setOn, on, volume, setVolume }) {
+function Display({ label, setOn, on, volume, setVolume, id }) {
   const onClick = () => {
     setOn(!on);
   };
@@ -20,7 +20,7 @@ function Display({ label, setOn, on, volume, setVolume }) {
   }, [volume]);
 
   return (
-    <div className={styles.outer}>
+    <div className={styles.outer} id={id}>
       {/* power button */}
       <button className={styles.powerBtn} onClick={onClick}>
         <span

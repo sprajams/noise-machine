@@ -67,18 +67,18 @@ function Machine() {
     <div>
       <div className={styles.main} id="drum-machine">
         <Display
-          id="display"
           label={label}
           setOn={setIsOn}
           on={isOn}
           setVolume={setVolume}
           volume={volume}
+          id="display"
         />
         <ul className={styles.padList}>
           {PAD_DATA
             ? PAD_DATA.map((obj, i) => {
                 return (
-                  <li key={i} className="drum-pad" id={i}>
+                  <li key={i}>
                     <Pad
                       id={obj.id}
                       label={obj.label}

@@ -16,13 +16,13 @@ function Pad({ id, audioSrc, label, disabled, showLabel, volume }) {
 
   useEffect(() => {
     const keydownListener = (e) => {
-      if (e.key === id) {
+      if (e.key.toLowerCase() === id) {
         playSound();
         setKeyPressed(true);
       }
     };
     const keyupListener = (e) => {
-      if (e.key === id) {
+      if (e.key.toLowerCase() === id) {
         setKeyPressed(false);
       }
     };
@@ -34,20 +34,24 @@ function Pad({ id, audioSrc, label, disabled, showLabel, volume }) {
       window.removeEventListener("keyup", keyupListener);
     };
   }, [id, playSound]);
-
+  console.log(styles);
   return (
-    <div>
-      <button
-        onClick={playSound}
-        className={clsx(styles.btn, keyPressed && styles.keyPressed)}
-        aria-label={label}
-        disabled={disabled}
-      >
-        <span className={styles.btnTop}>{id.toUpperCase()}</span>
-        <span className={styles.btnBottom}></span>
-      </button>
-      <audio ref={audioRef} src={audioSrc}></audio>
-    </div>
+    <button
+      onClick={playSound}
+      className={clsx(styles.btn, keyPressed && styles.keyPressed, "drum-pad")}
+      aria-label={label}
+      disabled={disabled}
+      id={`pad-${id}`}
+    >
+      <span className={styles.btnTop}>{id.toUpperCase()}</span>
+      <span className={styles.btnBottom}></span>
+      <audio
+        ref={audioRef}
+        src={audioSrc}
+        className="clip"
+        id={id.toUpperCase()}
+      ></audio>
+    </button>
   );
 }
 
